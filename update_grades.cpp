@@ -42,7 +42,6 @@ int main (int argc, char **argv) {
     i = first_line.find(',', i);
     asg_col++;
   }
-  asg_col--;
 
   if (asg_col < 0) {
     fprintf(stderr, "Error: assignment %s not yet created\n", asg_name.c_str());
