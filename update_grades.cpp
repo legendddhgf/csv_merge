@@ -29,34 +29,25 @@ int main (int argc, char **argv) {
   }
 
   fclose(input);
-  /*
-  fprintf(stdout, "Testing file reading skillz\n");
-  for (int i = 0; i < out_lines.size(); i++) {
-    fprintf(stdout, "%s", out_lines.at(i).c_str());
-  }
-  if (1) return 0;
-  */
 
   int asg_col = -1;
 
   string first_line = out_lines.at(0);
   for (int i = 0; i < first_line.size();) { // this sets asg_col
                                                 // appropriately
-    if (first_line.find_first_of(asg_name, i) == -1) {
+    if (first_line.find(asg_name, i) == string::npos) {
       break;
     }
     i++;
-    i = first_line.find_first_of(',', i);
+    i = first_line.find(',', i);
     asg_col++;
   }
+  asg_col--;
 
-  if (asg_col == -1) {
+  if (asg_col < 0) {
     fprintf(stderr, "Error: assignment %s not yet created\n", asg_name.c_str());
     exit(1);
   }
-
-  //TODO: OH GOD THE HARDCODING
-  asg_col = 5;
 
   printf("asg_col is %d\n", asg_col);
 
