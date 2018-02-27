@@ -6,4 +6,6 @@ cmps101... was first arg
 merge... was third arg
 pa1 was fourth arg
 
+CMD <AUTOMATIC_CSV> <CANVAS_CSV> <MERGE_CSV> <ASGN_NAME>
+
 this is trash, please fix
