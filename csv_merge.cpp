@@ -33,7 +33,7 @@ int main (int argc, char **argv) {
   int asg_col = -1;
 
   string first_line = out_lines.at(0);
-  for (int i = 0; i < first_line.size();) { // this sets asg_col
+  for (int i = 0; i < (int) first_line.size();) { // this sets asg_col
                                                 // appropriately
     if (first_line.find(asg_name, i) == string::npos) {
       break;
@@ -56,9 +56,9 @@ int main (int argc, char **argv) {
   while(fgets(line, 8191, input)) {
     string current_student = string(strtok(line, ","));
     string current_grade = string(strtok(NULL, ",\n"));
-    for (int i = 2; i < out_lines.size(); i++) { // first two lines are headers
+    for (int i = 2; i < (int) out_lines.size(); i++) { // first two lines are headers
       string current_line = out_lines.at(i);
-      if (current_line.find(current_student) != -1) {
+      if ((int) current_line.find(current_student) != -1) {
         int j = 0;
         for (int k = 0; k < asg_col; k++) {
           j++;
@@ -66,9 +66,11 @@ int main (int argc, char **argv) {
         }
         j++; // because yolo debugging
         out_lines.at(i).insert(j, current_grade);
+        fprintf(stdout, "Matching grade %s to student %s\n",
+            current_grade.c_str(), current_student.c_str());
         break;
       }
-      if (i == out_lines.size() - 1) {
+      if (i == (int) out_lines.size() - 1) {
         if (1) continue; //s'all good dog
         fprintf(stderr, "Couldn't find student: (%s)\n", current_student.c_str());
         exit(1);
@@ -79,7 +81,7 @@ int main (int argc, char **argv) {
 
   FILE *out = fopen(argv[3], "w");
 
-  for (int i = 0; i < out_lines.size(); i++) {
+  for (int i = 0; i < (int) out_lines.size(); i++) {
     fprintf(out, "%s", out_lines.at(i).c_str());
   }
 
