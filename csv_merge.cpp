@@ -60,9 +60,13 @@ int main (int argc, char **argv) {
       string current_line = out_lines.at(i);
       if ((int) current_line.find(current_student) != -1) {
         int j = 0;
-        for (int k = 0; k < asg_col; k++) {
+        int parse_quotes = 0;
+        int k = 0;
+        while (k < asg_col) {
           j++;
-          j = current_line.find_first_of(',', j);
+          j = current_line.find_first_of(",\"", j);
+          if (current_line[j] == ',' && !parse_quotes) k++;
+          else if (current_line[j] == '\"') parse_quotes = !parse_quotes;
         }
         j++; // because yolo debugging
         out_lines.at(i).insert(j, current_grade);
